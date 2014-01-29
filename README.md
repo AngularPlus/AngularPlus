@@ -30,6 +30,27 @@ angular.module('app', ['ngRoute', 'ngAnimate', 'ngplus']);
 ```css
 .ngplus-overlay-background { top:0px; left:0px; padding-left:100px;position:absolute;z-index:1000;height:100%;width:100%;background-color:#808080;opacity:0.3;}
 .ngplus-overlay-content { position:absolute; border: 1px solid #000; background-color:#fff;font-weight: bold;height: 100px;width: 300px;z-index:1000;text-align:center;}
+
+/*Optional Animations*/
+.dissolve-animation.ng-hide-remove,
+.dissolve-animation.ng-hide-add {
+    display: inline !important;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+    .dissolve-animation.ng-hide-remove.ng-hide-remove-active,
+    .dissolve-animation.ng-hide-add {
+        opacity: 1;
+    }
+
+        .dissolve-animation.ng-hide-add.ng-hide-add-active,
+        .dissolve-animation.ng-hide-remove {
+            opacity: 0;
+        }
+
 ```
 
 4. Add the directive into your main shell page:
@@ -54,4 +75,10 @@ node server.js
 ngplusOverlay directive in action.
 
 Note: This directive was created for a prototype project and has only been tested with Chrome and IE10+. It's intended to provide a starting point, evolve over time (please contribute!), and hopefully save someone some time.
+
+###Options
+
+- `ngplus-overlay-delay-in="50"` indicates the number of milliseconds to wait before showing the overlay. This is useful so we do not have a flicker for super short XHR. Default is 500 ms.
+- `ngplus-overlay-delay-out="700"` indicates the number of milliseconds to keep the overlay around after the last XHR has completed. Default is 500 ms.
+- `ngplus-overlay-animation="dissolve-animation"` indicates the CSS animation to apply. Must be an animation that supports the AngularJS standard for ngShow/ngHide. This is an optional setting. 
 
