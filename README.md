@@ -28,8 +28,30 @@ angular.module('app', ['ngRoute', 'ngAnimate', 'ngplus']);
 3. Add the following styles into a CSS stylesheet (tweak as needed):
 
 ```css
-.ngplus-overlay-background { top:0px; left:0px; padding-left:100px;position:absolute;z-index:1000;height:100%;width:100%;background-color:#808080;opacity:0.3;}
-.ngplus-overlay-content { position:absolute; border: 1px solid #000; background-color:#fff;font-weight: bold;height: 100px;width: 300px;z-index:1000;text-align:center;}
+.ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #808080;
+    opacity: 0.2;
+}
+
+.ngplus-overlay-content {
+    position: absolute;
+    /*border: 1px solid #000;*/
+    /*background-color: #fff;*/
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+}
 
 /*Optional Animations*/
 .dissolve-animation.ng-hide-remove,
@@ -61,9 +83,8 @@ angular.module('app', ['ngRoute', 'ngAnimate', 'ngplus']);
      ngplus-overlay-delay-out="700"
      ngplus-overlay-animation="dissolve-animation">
     <img src="../../content/images/busy.gif"/>
- 	  Optional loading message or HTML content (such as an image) goes here
+ 	  Optional loading message or HTML content goes here
 </div>
-	Loading message or HTML content (such as an image) goes here
 ```
 
 Once you have the code locally, install [Node.js](http://nodejs.org), open a command-prompt and run:
