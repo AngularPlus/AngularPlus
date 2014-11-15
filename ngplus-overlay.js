@@ -1,6 +1,6 @@
 /*
  * ngplus-overlay.js
- * Version 0.9.0
+ * Version 0.9.2
  * Copyright 2014 John Papa and Dan Wahlin
  * All Rights Reserved.
  * Use, reproduction, distribution, and modification of this code is subject to the terms and

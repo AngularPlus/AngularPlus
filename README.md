@@ -3,7 +3,7 @@ AngularPlus
 
 AngularPlus (ngplus) contains a set of helpers, directives and services for AngularJS, under MIT license. 
 
-Version 0.9.0
+Version 0.9.2
 
 Authors: John Papa and Dan Wahlin
   
