@@ -16,19 +16,19 @@
 
     //Empty factory to hook into $httpProvider.interceptors
     //Directive will hookup request, response, and responseError interceptors
-    overlayApp.factory('httpInterceptor', httpInterceptor);
+    overlayApp.factory('ngplus.httpInterceptor', httpInterceptor);
     function httpInterceptor () { return {} }
 
     //Hook httpInterceptor factory into the $httpProvider interceptors so that we can monitor XHR calls
     overlayApp.config(['$httpProvider', httpProvider]);
     function httpProvider ($httpProvider) {
-        $httpProvider.interceptors.push('httpInterceptor');
+        $httpProvider.interceptors.push('ngplus.httpInterceptor');
     }
 
     //Directive that uses the httpInterceptor factory above to monitor XHR calls
     //When a call is made it displays an overlay and a content area
     //No attempt has been made at this point to test on older browsers
-    overlayApp.directive('ngplusOverlay', ['$q', '$timeout', '$window', 'httpInterceptor', overlay]);
+    overlayApp.directive('ngplusOverlay', ['$q', '$timeout', '$window', 'ngplus.httpInterceptor', overlay]);
 
     function overlay ($q, $timeout, $window, httpInterceptor) {
         var directive = {
@@ -77,7 +77,9 @@
             function wireUpHttpInterceptor() {
 
                 httpInterceptor.request = function (config) {
-                    processRequest();
+                    if (!config.hideOverlay) {
+                        processRequest();
+                    }
                     return config || $q.when(config);
                 };
 
