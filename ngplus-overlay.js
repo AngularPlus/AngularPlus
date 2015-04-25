@@ -77,28 +77,42 @@
             function wireUpHttpInterceptor() {
 
                 httpInterceptor.request = function (config) {
-                    if (!config.hideOverlay) {
+                    if (!config.ngplusIgnore) {
                         processRequest();
                     }
                     return config || $q.when(config);
                 };
 
                 httpInterceptor.response = function (response) {
-                    processResponse();
+                    if (response && response.config && !response.config.ngplusIgnore) {
+                        processResponse();
+                    }
                     return response || $q.when(response);
                 };
 
                 httpInterceptor.responseError = function (rejection) {
-                    processResponse();
+                    if (rejection && rejection.config && !rejection.config.ngplusIgnore) {
+                        processResponse();
+                    }
                     return $q.reject(rejection);
                 };
             }
 
             //Monitor jQuery Ajax calls in case it's used in an app
             function wirejQueryInterceptor() {
-                $(document).ajaxStart(function () { processRequest(); });
-                $(document).ajaxComplete(function () { processResponse(); });
-                $(document).ajaxError(function () { processResponse(); });
+
+                $(document).ajaxSend(function(e, xhr, options) {
+                  if (options && !options.ngplusIgnore) {
+                    processRequest();
+                  }
+                });
+
+                // ajax complete always gets fired, even on errors
+                $(document).ajaxComplete(function(e, xhr, options) {
+                  if (options && !options.ngplusIgnore) {
+                    processResponse();
+                  }
+                });
             }
 
             function processRequest() {
