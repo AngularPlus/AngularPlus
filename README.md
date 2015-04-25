@@ -105,7 +105,7 @@ Note: This directive was created for a prototype project and has only been teste
 
 ### Disable ngPlus Overlay
 
-The ngPlus overlay can be disabled for specific requests by setting the `ngplusIgnore` option to `true`
+The ngPlus overlay can be disabled for specific requests by setting the `hideOverlay` option to `true`
 on either the angular http request config or the jquery ajax options objects.
 
 - Angular
@@ -113,7 +113,7 @@ on either the angular http request config or the jquery ajax options objects.
 $http({
     url: 'http://www.google.com',
     // ...
-    ngplusIgnore: true,
+    hideOverlay: true,
 });
 ```
 
@@ -122,12 +122,12 @@ $http({
 $.ajax({
     url: 'http://www.google.com',
     // ...
-    ngplusIgnore: true,
+    hideOverlay: true,
 });
 ```
 
 If you don't have control over the xhr being made you can create an angular interceptor to modify
 the request config and register that before the ngPlus interceptor.  In jQuery you can register
 an `$.ajaxSend` handler before the ngPlus handler to check the request object and add the
-ngplusIgnore attribute if needed.
+hideOverlay attribute if needed.
 
