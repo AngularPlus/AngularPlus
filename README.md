@@ -106,7 +106,7 @@ Note: This directive was created for a prototype project and has only been teste
 ### Disable ngPlus Overlay
 
 The ngPlus overlay can be disabled for specific requests by setting the `ngplusIgnore` option to `true`
-on either the angular http request config or the jquery ajax pptions objects.
+on either the angular http request config or the jquery ajax options objects.
 
 - Angular
 ```js

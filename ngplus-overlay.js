@@ -77,21 +77,21 @@
             function wireUpHttpInterceptor() {
 
                 httpInterceptor.request = function (config) {
-                    if (!config.ngplusIgnore) {
+                    if (!config.hideOverlay) {
                         processRequest();
                     }
                     return config || $q.when(config);
                 };
 
                 httpInterceptor.response = function (response) {
-                    if (response && response.config && !response.config.ngplusIgnore) {
+                    if (response && response.config && !response.config.hideOverlay) {
                         processResponse();
                     }
                     return response || $q.when(response);
                 };
 
                 httpInterceptor.responseError = function (rejection) {
-                    if (rejection && rejection.config && !rejection.config.ngplusIgnore) {
+                    if (rejection && rejection.config && !rejection.config.hideOverlay) {
                         processResponse();
                     }
                     return $q.reject(rejection);
@@ -102,14 +102,14 @@
             function wirejQueryInterceptor() {
 
                 $(document).ajaxSend(function(e, xhr, options) {
-                  if (options && !options.ngplusIgnore) {
+                  if (options && !options.hideOverlay) {
                     processRequest();
                   }
                 });
 
                 // ajax complete always gets fired, even on errors
                 $(document).ajaxComplete(function(e, xhr, options) {
-                  if (options && !options.ngplusIgnore) {
+                  if (options && !options.hideOverlay) {
                     processResponse();
                   }
                 });
