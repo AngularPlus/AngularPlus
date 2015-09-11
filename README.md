@@ -109,11 +109,21 @@ The ngPlus overlay can be disabled for specific requests by setting the `hideOve
 on either the angular http request config or the jquery ajax options objects.
 
 - Angular
-```js
+
+$http
+```
 $http({
     url: 'http://www.google.com',
     // ...
     hideOverlay: true,
+});
+```
+$resource
+```$resource
+return $resource('http://www.google.com', {}, {
+    get : {
+        'hideOverlay':true
+    }
 });
 ```
 
