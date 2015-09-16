@@ -12,7 +12,7 @@ Use, reproduction, distribution, and modification of this code is subject to the
 
 
 
-#ngplusOverlay Directive
+# ngplusOverlay Directive
 
 ![ngplusOverlay Directive Example](https://raw.github.com/DanWahlin/AngularOverlay/master/content/images/appExample.png)
 
@@ -97,9 +97,47 @@ ngplusOverlay directive in action.
 
 Note: This directive was created for a prototype project and has only been tested with Chrome and IE10+. It's intended to provide a starting point, evolve over time (please contribute!), and hopefully save someone some time.
 
-###Options
+### Options
 
 - `ngplus-overlay-delay-in="50"` indicates the number of milliseconds to wait before showing the overlay. This is useful so we do not have a flicker for super short XHR. Default is 500 ms.
 - `ngplus-overlay-delay-out="700"` indicates the number of milliseconds to keep the overlay around after the last XHR has completed. Default is 500 ms.
 - `ngplus-overlay-animation="dissolve-animation"` indicates the CSS animation to apply. Must be an animation that supports the AngularJS standard for ngShow/ngHide. This is an optional setting. 
+
+### Disable ngPlus Overlay
+
+The ngPlus overlay can be disabled for specific requests by setting the `hideOverlay` option to `true`
+on either the angular http request config or the jquery ajax options objects.
+
+- Angular
+
+$http
+```
+$http({
+    url: 'http://www.google.com',
+    // ...
+    hideOverlay: true,
+});
+```
+$resource
+```$resource
+return $resource('http://www.google.com', {}, {
+    get : {
+        'hideOverlay':true
+    }
+});
+```
+
+- jQuery
+```js
+$.ajax({
+    url: 'http://www.google.com',
+    // ...
+    hideOverlay: true,
+});
+```
+
+If you don't have control over the xhr being made you can create an angular interceptor to modify
+the request config and register that before the ngPlus interceptor.  In jQuery you can register
+an `$.ajaxSend` handler before the ngPlus handler to check the request object and add the
+hideOverlay attribute if needed.
 
