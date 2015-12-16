@@ -47,8 +47,8 @@
         function getTemplate () {
             return '<div id="ngplus-overlay-container" ' +
                 'class="{{ngplusOverlayAnimation}}" data-ng-show="!!show">' +
-                '<div class="ngplus-overlay-background"></div>' +
-                '<div id="ngplus-overlay-content" class="ngplus-overlay-content" data-ng-transclude>' +
+                '<div class="ngplus-overlay-background">' +
+                '<div id="ngplus-overlay-content" class="ngplus-overlay-content" data-ng-transclude></div>' +
                 '</div>' +
                 '</div>';
         }
