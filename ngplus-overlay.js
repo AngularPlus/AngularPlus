@@ -39,19 +39,10 @@
             },
             restrict: 'EA',
             transclude: true,
-            template: getTemplate(),
+            templateUrl: './ngplus-overlay.html',
             link: link
         };
         return directive;
-
-        function getTemplate () {
-            return '<div id="ngplus-overlay-container" ' +
-                'class="{{ngplusOverlayAnimation}}" data-ng-show="!!show">' +
-                '<div class="ngplus-overlay-background">' +
-                '<div id="ngplus-overlay-content" class="ngplus-overlay-content" data-ng-transclude></div>' +
-                '</div>' +
-                '</div>';
-        }
 
         function link (scope, element, attrs) {
             var defaults = {
