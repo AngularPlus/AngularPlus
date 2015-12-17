@@ -39,11 +39,44 @@
             },
             restrict: 'EA',
             transclude: true,
-            templateUrl: './ngplus-overlay.html',
+            template: getTemplate(),
             link: link
         };
         return directive;
+        
+        function getTemplate () {
+            return '<style>' +
+                '.ngplus-overlay-background {' +
+                   ' top: 0px;' +
+                    'left: 0px;' +
+                    'padding-left: 100px;' +
+                    'position: absolute;' +
+                    'z-index: 10000;' +
+                    'height: 100%;' +
+                    'width: 100%;' +
+                    'background-color: #808080;' +
+                    'opacity: 0.7;' +
+                '}' +
 
+                '.ngplus-overlay-content {' +
+                    'position: absolute;' +
+                    'font-weight: bold;' +
+                    'height: 100px;' +
+                    'width: 300px;' +
+                    'height: 15em;' +
+                    'width: 20em;' +
+                    'z-index: 10000;' +
+                    'text-align: center;' +
+                '}' +
+                '</style>' +
+                '<div id="ngplus-overlay-container" ' +
+                'class="{{ngplusOverlayAnimation}}" data-ng-show="!!show">' +
+                '<div class="ngplus-overlay-background">' +
+                '<div id="ngplus-overlay-content" class="ngplus-overlay-content" data-ng-transclude></div>' +
+                '</div>' +
+                '</div>';
+        }
+        
         function link (scope, element, attrs) {
             var defaults = {
                 overlayDelayIn: 500,
