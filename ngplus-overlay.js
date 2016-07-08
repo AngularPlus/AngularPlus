@@ -28,9 +28,9 @@
     //Directive that uses the httpInterceptor factory above to monitor XHR calls
     //When a call is made it displays an overlay and a content area
     //No attempt has been made at this point to test on older browsers
-    overlayApp.directive('ngplusOverlay', ['$q', '$timeout', '$window', 'ngplus.httpInterceptor', overlay]);
+    overlayApp.directive('ngplusOverlay', ['$q', '$timeout', '$window', 'ngplus.httpInterceptor', '$rootScope', overlay]);
 
-    function overlay ($q, $timeout, $window, httpInterceptor) {
+    function overlay ($q, $timeout, $window, httpInterceptor, rootScope) {
         var directive = {
             scope: {
                 ngplusOverlayDelayIn: "@",
@@ -66,6 +66,18 @@
             var timerPromiseHide = null;
 
             init();
+            
+            var wait = 0;
+            rootScope.$on('showSpinner', () => {
+              if (++wait === 1) {
+                showOverlay()
+              }
+            })
+            rootScope.$on('hideSpinner', () => {
+              if (--wait === 0) {
+                hideOverlay()
+              }
+            })
 
             function init() {
                 wireUpHttpInterceptor();
