@@ -35,7 +35,9 @@
             scope: {
                 ngplusOverlayDelayIn: "@",
                 ngplusOverlayDelayOut: "@",
-                ngplusOverlayAnimation: "@"
+                ngplusOverlayAnimation: "@",
+                ngplusTop: "@",
+                ngplusLeft:"@"
             },
             restrict: 'EA',
             transclude: true,
@@ -173,9 +175,9 @@
                 var content = document.getElementById('ngplus-overlay-content');
                 var contentWidth = parseInt(getComputedStyle(content, 'width').replace('px', ''));
                 var contentHeight = parseInt(getComputedStyle(content, 'height').replace('px', ''));
-
-                content.style.top = h / 2 - contentHeight / 2 + 'px';
-                content.style.left = w / 2 - contentWidth / 2 + 'px';
+                
+                content.style.top = scope.ngplusTop ? scope.ngplusTop + 'px': h / 2 - contentHeight / 2 + 'px';
+                content.style.left = scope.ngplusLeft ? scope.ngplusLeft + 'px': w / 2 - contentWidth / 2 + 'px';
 
                 scope.show = true;
             }
